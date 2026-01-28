@@ -1,11 +1,20 @@
+from datetime import datetime
 
-# Auto-generated implementation for SCRUM-3
-# Implements: Autonomous Agentic Development - Code for getting todays date
+def get_today_date() -> str:
+    """
+    Retrieves today's date in YYYY-MM-DD format.
 
-class Implementation:
-    def __init__(self):
-        print("Initialized")
-        
-    def execute(self):
-        # Logic here
-        pass
+    Returns:
+        str: Today's date as a string.
+    """
+    return datetime.today().date().isoformat()
+
+def print_greeting() -> None:
+    """
+    Prints a greeting message with today's date.
+    """
+    today_date = get_today_date()
+    print(f"Hello, how are you today? Today's date is {today_date}.")
+
+if __name__ == "__main__":
+    print_greeting()
