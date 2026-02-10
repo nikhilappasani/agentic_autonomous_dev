@@ -1,70 +1,69 @@
 class AutonomousAgent:
     """
-    A class representing an autonomous agentic system designed to perform specific tasks
-    with minimal human intervention.
+    A class to represent an autonomous agent capable of performing specific tasks with minimal human intervention.
     """
 
-    def __init__(self, name: str, tasks: list[str]) -> None:
+    def __init__(self, name: str, capabilities: list[str]) -> None:
         """
-        Initialize the autonomous agent with a name and a list of tasks.
+        Initialize the autonomous agent with a name and a list of capabilities.
 
         :param name: The name of the agent.
-        :param tasks: A list of tasks the agent is responsible for.
+        :param capabilities: A list of capabilities the agent possesses.
         """
         self.name = name
-        self.tasks = tasks
-        self.environment = None
+        self.capabilities = capabilities
 
-    def set_environment(self, environment: dict) -> None:
+    def perform_task(self, task: str) -> str:
         """
-        Set the environment in which the agent operates.
+        Perform a task if it is within the agent's capabilities.
 
-        :param environment: A dictionary representing the environment settings.
+        :param task: The task to be performed.
+        :return: A message indicating the result of the task attempt.
         """
-        self.environment = environment
+        if task in self.capabilities:
+            return f"{self.name} successfully performed the task: {task}."
+        else:
+            return f"{self.name} cannot perform the task: {task}. Capability not found."
 
-    def perform_tasks(self) -> None:
+    def add_capability(self, capability: str) -> None:
         """
-        Perform the tasks assigned to the agent within the given environment.
-        """
-        if not self.environment:
-            raise ValueError("Environment not set for the agent.")
-        
-        for task in self.tasks:
-            self._execute_task(task)
+        Add a new capability to the agent.
 
-    def _execute_task(self, task: str) -> None:
+        :param capability: The capability to be added.
         """
-        Execute a specific task.
+        if capability not in self.capabilities:
+            self.capabilities.append(capability)
+            print(f"Capability '{capability}' added to {self.name}.")
+        else:
+            print(f"{self.name} already has the capability '{capability}'.")
 
-        :param task: The task to be executed.
+    def remove_capability(self, capability: str) -> None:
         """
-        # Placeholder for task execution logic
-        print(f"Executing task: {task} in environment: {self.environment}")
+        Remove a capability from the agent.
 
-    def gather_feedback(self) -> dict:
+        :param capability: The capability to be removed.
         """
-        Gather feedback from the environment after task execution.
+        if capability in self.capabilities:
+            self.capabilities.remove(capability)
+            print(f"Capability '{capability}' removed from {self.name}.")
+        else:
+            print(f"{self.name} does not have the capability '{capability}' to remove.")
 
-        :return: A dictionary containing feedback data.
+    def list_capabilities(self) -> list[str]:
         """
-        # Placeholder for feedback gathering logic
-        feedback = {"status": "success", "details": "All tasks executed successfully."}
-        return feedback
+        List all capabilities of the agent.
 
-    def improve_system(self, feedback: dict) -> None:
+        :return: A list of capabilities.
         """
-        Improve the system based on feedback.
-
-        :param feedback: A dictionary containing feedback data.
-        """
-        # Placeholder for system improvement logic
-        print(f"Improving system based on feedback: {feedback}")
+        return self.capabilities
 
 
 # Example usage
-agent = AutonomousAgent(name="Agent001", tasks=["Task1", "Task2"])
-agent.set_environment({"setting1": "value1", "setting2": "value2"})
-agent.perform_tasks()
-feedback = agent.gather_feedback()
-agent.improve_system(feedback)
+if __name__ == "__main__":
+    agent = AutonomousAgent(name="Agent007", capabilities=["navigate", "analyze data"])
+    print(agent.perform_task("navigate"))
+    print(agent.perform_task("cook"))
+    agent.add_capability("cook")
+    print(agent.perform_task("cook"))
+    agent.remove_capability("analyze data")
+    print(agent.list_capabilities())
