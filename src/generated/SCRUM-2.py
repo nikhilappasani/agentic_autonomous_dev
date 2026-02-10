@@ -1,71 +1,84 @@
 class AutonomousAgent:
     """
-    A class to represent an autonomous agent capable of performing specific tasks with minimal human intervention.
+    A class representing an autonomous agent capable of performing specific tasks with minimal human intervention.
     """
 
-    def __init__(self, name: str, capabilities: list[str]):
+    def __init__(self, name: str, tasks: list[str]):
         """
-        Initialize the autonomous agent with a name and a list of capabilities.
+        Initialize the autonomous agent with a name and a list of tasks.
 
         :param name: The name of the agent.
-        :param capabilities: A list of tasks the agent can perform.
+        :param tasks: A list of tasks the agent is capable of performing.
         """
         self.name = name
-        self.capabilities = capabilities
+        self.tasks = tasks
+        self.state = "idle"
 
     def perform_task(self, task: str) -> bool:
         """
         Perform a specified task if it is within the agent's capabilities.
 
         :param task: The task to be performed.
-        :return: True if the task is performed successfully, False otherwise.
+        :return: True if the task was performed successfully, False otherwise.
         """
-        if task in self.capabilities:
+        if task in self.tasks:
+            self.state = "performing task"
+            # Simulate task performance
             print(f"{self.name} is performing task: {task}")
+            self.state = "idle"
             return True
         else:
             print(f"Task '{task}' is not within {self.name}'s capabilities.")
             return False
 
-    def add_capability(self, new_capability: str) -> None:
+    def get_status(self) -> str:
         """
-        Add a new capability to the agent's list of capabilities.
+        Get the current status of the agent.
 
-        :param new_capability: The new capability to be added.
+        :return: The current state of the agent.
         """
-        if new_capability not in self.capabilities:
-            self.capabilities.append(new_capability)
-            print(f"Added new capability: {new_capability}")
-        else:
-            print(f"Capability '{new_capability}' already exists.")
-
-    def list_capabilities(self) -> list[str]:
-        """
-        List all capabilities of the agent.
-
-        :return: A list of the agent's capabilities.
-        """
-        return self.capabilities
+        return self.state
 
 
-def main():
+class SystemMonitor:
     """
-    Main function to demonstrate the use of the AutonomousAgent class.
+    A class to monitor the performance and status of the autonomous agent system.
     """
-    # Create an instance of AutonomousAgent
-    agent = AutonomousAgent(name="Agent001", capabilities=["task1", "task2"])
 
-    # Perform tasks
-    agent.perform_task("task1")
-    agent.perform_task("task3")
+    def __init__(self, agent: AutonomousAgent):
+        """
+        Initialize the system monitor with a reference to an autonomous agent.
 
-    # Add a new capability
-    agent.add_capability("task3")
+        :param agent: The autonomous agent to be monitored.
+        """
+        self.agent = agent
 
-    # List all capabilities
-    capabilities = agent.list_capabilities()
-    print(f"Current capabilities: {capabilities}")
+    def check_agent_status(self) -> str:
+        """
+        Check and return the current status of the monitored agent.
+
+        :return: The current status of the agent.
+        """
+        return self.agent.get_status()
+
+    def log_performance_metrics(self, task: str, success: bool) -> None:
+        """
+        Log the performance metrics of a task performed by the agent.
+
+        :param task: The task that was performed.
+        :param success: Whether the task was performed successfully.
+        """
+        status = "success" if success else "failure"
+        print(f"Task '{task}' performed with {status}.")
 
 
+# Example usage
 if __name__ == "__main__":
-    main()
+    agent = AutonomousAgent(name="Agent001", tasks=["task1", "task2", "task3"])
+    monitor = SystemMonitor(agent=agent)
+
+    task_to_perform = "task1"
+    success = agent.perform_task(task_to_perform)
+    monitor.log_performance_metrics(task=task_to_perform, success=success)
+
+    print(f"Agent status: {monitor.check_agent_status()}")
