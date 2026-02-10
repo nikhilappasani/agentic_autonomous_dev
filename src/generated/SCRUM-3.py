@@ -2,7 +2,7 @@ from datetime import date
 
 def get_todays_date() -> str:
     """
-    Retrieve today's date and return it in a formatted string.
+    Retrieves today's date and returns it as a formatted string.
 
     Returns:
         str: Today's date formatted as 'Month Day, Year'.
@@ -13,7 +13,7 @@ def get_todays_date() -> str:
 
 def print_greeting() -> None:
     """
-    Print a greeting message along with today's date.
+    Prints a greeting message that includes today's date.
     """
     try:
         formatted_date = get_todays_date()
