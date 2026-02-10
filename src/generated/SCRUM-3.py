@@ -1,19 +1,25 @@
-import datetime
+from datetime import date
 
-def get_today_date() -> str:
+def get_todays_date() -> str:
     """
-    Retrieves today's date and returns a greeting message.
+    Retrieve today's date and return it in a formatted string.
 
     Returns:
-        str: A greeting message with today's date.
+        str: Today's date formatted as 'Month Day, Year'.
+    """
+    today = date.today()
+    formatted_date = today.strftime("%B %d, %Y")
+    return formatted_date
+
+def print_greeting() -> None:
+    """
+    Print a greeting message along with today's date.
     """
     try:
-        today_date = datetime.date.today()
-        greeting_message = f"Hello, how are you today? Today's date is {today_date}."
-        return greeting_message
+        formatted_date = get_todays_date()
+        print(f"Hello, how are you today? Today's date is {formatted_date}.")
     except Exception as e:
-        return f"An error occurred: {e}"
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    # Print the greeting message with today's date
-    print(get_today_date())
+    print_greeting()
