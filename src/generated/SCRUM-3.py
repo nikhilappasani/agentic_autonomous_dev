@@ -15,11 +15,8 @@ def main() -> None:
     """
     Main function to execute the script and print the greeting message.
     """
-    try:
-        message = get_greeting_message()
-        print(message)
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    message = get_greeting_message()
+    print(message)
 
 if __name__ == "__main__":
     main()
