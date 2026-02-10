@@ -1,134 +1,88 @@
 class AutonomousAgent:
     """
-    A class representing an autonomous agent capable of performing specific tasks with minimal human intervention.
+    A class to represent an autonomous agent capable of performing specific tasks with minimal human intervention.
     """
 
-    def __init__(self, environment: str, capabilities: list[str]) -> None:
+    def __init__(self, name: str, tasks: list[str]):
         """
-        Initialize the autonomous agent with its operating environment and capabilities.
+        Initialize the autonomous agent with a name and a list of tasks.
 
-        :param environment: The environment in which the agent operates.
-        :param capabilities: A list of capabilities the agent possesses.
+        :param name: The name of the agent.
+        :param tasks: A list of tasks the agent is capable of performing.
         """
-        self.environment = environment
-        self.capabilities = capabilities
+        self.name = name
+        self.tasks = tasks
 
-    def perform_task(self, task: str) -> bool:
+    def perform_task(self, task: str) -> str:
         """
         Perform a specified task if it is within the agent's capabilities.
 
-        :param task: The task to be performed by the agent.
-        :return: True if the task was performed successfully, False otherwise.
+        :param task: The task to be performed.
+        :return: A message indicating the result of the task attempt.
         """
-        if task in self.capabilities:
-            # Simulate task execution
-            print(f"Performing task: {task}")
-            return True
+        if task in self.tasks:
+            return f"Agent {self.name} is performing task: {task}"
         else:
-            print(f"Task '{task}' is not within capabilities.")
-            return False
+            return f"Task '{task}' is not within the capabilities of agent {self.name}."
 
-    def add_capability(self, capability: str) -> None:
+    def add_task(self, task: str) -> None:
         """
-        Add a new capability to the agent.
+        Add a new task to the agent's list of capabilities.
 
-        :param capability: The capability to be added.
+        :param task: The task to be added.
         """
-        if capability not in self.capabilities:
-            self.capabilities.append(capability)
-            print(f"Added capability: {capability}")
+        if task not in self.tasks:
+            self.tasks.append(task)
+            print(f"Task '{task}' added to agent {self.name}.")
         else:
-            print(f"Capability '{capability}' already exists.")
+            print(f"Task '{task}' is already in the list of tasks for agent {self.name}.")
 
-    def remove_capability(self, capability: str) -> None:
+    def remove_task(self, task: str) -> None:
         """
-        Remove an existing capability from the agent.
+        Remove a task from the agent's list of capabilities.
 
-        :param capability: The capability to be removed.
+        :param task: The task to be removed.
         """
-        if capability in self.capabilities:
-            self.capabilities.remove(capability)
-            print(f"Removed capability: {capability}")
+        if task in self.tasks:
+            self.tasks.remove(task)
+            print(f"Task '{task}' removed from agent {self.name}.")
         else:
-            print(f"Capability '{capability}' not found.")
+            print(f"Task '{task}' is not in the list of tasks for agent {self.name}.")
 
-    def list_capabilities(self) -> list[str]:
+    def list_tasks(self) -> list[str]:
         """
-        List all capabilities of the agent.
+        List all tasks the agent is capable of performing.
 
-        :return: A list of capabilities.
+        :return: A list of tasks.
         """
-        return self.capabilities
+        return self.tasks
 
 
-class EnvironmentInterface:
+def main():
     """
-    A class representing the interface between the autonomous agent and its environment.
+    Main function to demonstrate the functionality of the AutonomousAgent class.
     """
+    # Create an instance of AutonomousAgent
+    agent = AutonomousAgent(name="Agent001", tasks=["task1", "task2"])
 
-    def __init__(self, environment_data: dict) -> None:
-        """
-        Initialize the environment interface with environment data.
+    # Perform a task
+    print(agent.perform_task("task1"))
 
-        :param environment_data: A dictionary containing environment data.
-        """
-        self.environment_data = environment_data
+    # Add a new task
+    agent.add_task("task3")
 
-    def update_environment(self, key: str, value: any) -> None:
-        """
-        Update the environment data with a new key-value pair.
+    # Attempt to add an existing task
+    agent.add_task("task1")
 
-        :param key: The key to update in the environment data.
-        :param value: The value to associate with the key.
-        """
-        self.environment_data[key] = value
-        print(f"Updated environment: {key} = {value}")
+    # Remove a task
+    agent.remove_task("task2")
 
-    def get_environment_data(self) -> dict:
-        """
-        Retrieve the current environment data.
+    # Attempt to remove a non-existing task
+    agent.remove_task("task4")
 
-        :return: A dictionary containing the environment data.
-        """
-        return self.environment_data
+    # List all tasks
+    print("Current tasks:", agent.list_tasks())
 
 
-class DataProcessingModule:
-    """
-    A class representing a data processing module for the autonomous agent.
-    """
-
-    def __init__(self, data: list[any]) -> None:
-        """
-        Initialize the data processing module with initial data.
-
-        :param data: A list of data items to be processed.
-        """
-        self.data = data
-
-    def process_data(self) -> list[any]:
-        """
-        Process the data and return the processed results.
-
-        :return: A list of processed data items.
-        """
-        # Simulate data processing
-        processed_data = [item for item in self.data if item is not None]
-        print(f"Processed data: {processed_data}")
-        return processed_data
-
-    def add_data(self, new_data: any) -> None:
-        """
-        Add new data to the processing module.
-
-        :param new_data: The new data item to be added.
-        """
-        self.data.append(new_data)
-        print(f"Added data: {new_data}")
-
-    def clear_data(self) -> None:
-        """
-        Clear all data from the processing module.
-        """
-        self.data.clear()
-        print("Cleared all data.")
+if __name__ == "__main__":
+    main()
