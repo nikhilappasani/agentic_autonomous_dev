@@ -57,6 +57,7 @@ def main() -> None:
     Main function to demonstrate the use of the AutonomousAgent class.
     """
     agent = AutonomousAgent(name="Agent001", capabilities=["navigate", "analyze data", "report"])
+    
     print(agent.perform_task("navigate"))
     print(agent.perform_task("cook"))
 
