@@ -1,24 +1,17 @@
 from datetime import date
 
-def get_greeting() -> str:
+def print_greeting() -> None:
     """
-    Retrieves today's date and returns a greeting message.
+    Prints a greeting message along with today's date.
 
-    Returns:
-        str: A greeting message with today's date.
-    """
-    today = date.today()
-    return f"Hello, how are you today? Today's date is {today}."
-
-def main() -> None:
-    """
-    Main function to execute the script.
+    This function retrieves the current date using the `datetime` module
+    and prints a formatted greeting message to the console.
     """
     try:
-        greeting_message = get_greeting()
-        print(greeting_message)
+        today = date.today()
+        print(f"Hello, how are you today? Today's date is {today}.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
-    main()
+    print_greeting()
