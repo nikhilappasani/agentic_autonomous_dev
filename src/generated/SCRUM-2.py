@@ -1,74 +1,70 @@
 class AutonomousAgent:
     """
-    A class representing an autonomous agent capable of performing specific tasks with minimal human intervention.
+    A class to represent an autonomous agent capable of performing specific tasks with minimal human intervention.
     """
 
-    def __init__(self, name: str, tasks: list[str]) -> None:
+    def __init__(self, name: str, capabilities: list[str]) -> None:
         """
-        Initialize the autonomous agent with a name and a list of tasks.
+        Initialize the autonomous agent with a name and a list of capabilities.
 
         :param name: The name of the agent.
-        :param tasks: A list of tasks the agent is capable of performing.
+        :param capabilities: A list of capabilities the agent possesses.
         """
         self.name = name
-        self.tasks = tasks
+        self.capabilities = capabilities
 
     def perform_task(self, task: str) -> str:
         """
-        Perform a specified task if it is within the agent's capabilities.
+        Perform a task if it is within the agent's capabilities.
 
         :param task: The task to be performed.
         :return: A message indicating the result of the task attempt.
         """
-        if task in self.tasks:
+        if task in self.capabilities:
             return f"{self.name} is performing the task: {task}."
         else:
-            return f"Task '{task}' is not within {self.name}'s capabilities."
+            return f"{self.name} cannot perform the task: {task}."
 
-    def add_task(self, task: str) -> None:
+    def add_capability(self, capability: str) -> None:
         """
-        Add a new task to the agent's list of capabilities.
+        Add a new capability to the agent.
 
-        :param task: The task to be added.
+        :param capability: The capability to be added.
         """
-        if task not in self.tasks:
-            self.tasks.append(task)
-            print(f"Task '{task}' added to {self.name}'s capabilities.")
-        else:
-            print(f"Task '{task}' is already in {self.name}'s capabilities.")
+        if capability not in self.capabilities:
+            self.capabilities.append(capability)
 
-    def remove_task(self, task: str) -> None:
+    def remove_capability(self, capability: str) -> None:
         """
-        Remove a task from the agent's list of capabilities.
+        Remove a capability from the agent.
 
-        :param task: The task to be removed.
+        :param capability: The capability to be removed.
         """
-        if task in self.tasks:
-            self.tasks.remove(task)
-            print(f"Task '{task}' removed from {self.name}'s capabilities.")
-        else:
-            print(f"Task '{task}' is not in {self.name}'s capabilities.")
+        if capability in self.capabilities:
+            self.capabilities.remove(capability)
 
-    def list_tasks(self) -> list[str]:
+    def list_capabilities(self) -> list[str]:
         """
-        List all tasks the agent is capable of performing.
+        List all capabilities of the agent.
 
-        :return: A list of tasks.
+        :return: A list of the agent's capabilities.
         """
-        return self.tasks
+        return self.capabilities
 
 
 def main() -> None:
     """
-    Main function to demonstrate the functionality of the AutonomousAgent class.
+    Main function to demonstrate the use of the AutonomousAgent class.
     """
-    agent = AutonomousAgent(name="Agent007", tasks=["data analysis", "report generation"])
-    print(agent.perform_task("data analysis"))
-    print(agent.perform_task("email sending"))
-    agent.add_task("email sending")
-    print(agent.perform_task("email sending"))
-    agent.remove_task("report generation")
-    print(agent.list_tasks())
+    agent = AutonomousAgent(name="Agent001", capabilities=["navigate", "analyze data", "report"])
+    print(agent.perform_task("navigate"))
+    print(agent.perform_task("cook"))
+
+    agent.add_capability("cook")
+    print(agent.perform_task("cook"))
+
+    agent.remove_capability("analyze data")
+    print(agent.list_capabilities())
 
 
 if __name__ == "__main__":
