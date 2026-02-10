@@ -1,91 +1,76 @@
 class AutonomousAgent:
     """
-    A class representing an autonomous agent capable of performing specific tasks with minimal human intervention.
+    A class to represent an autonomous agent capable of performing specific tasks
+    with minimal human intervention.
     """
 
-    def __init__(self, name: str, environment: str) -> None:
+    def __init__(self, name: str, tasks: list[str]) -> None:
         """
-        Initialize the autonomous agent with a name and environment.
+        Initialize the autonomous agent with a name and a list of tasks.
 
         :param name: The name of the agent.
-        :param environment: The environment in which the agent operates.
+        :param tasks: A list of tasks the agent is capable of performing.
         """
         self.name = name
-        self.environment = environment
+        self.tasks = tasks
 
-    def gather_requirements(self) -> None:
+    def perform_task(self, task: str) -> str:
         """
-        Gather and analyze requirements from stakeholders.
-        """
-        # Placeholder for gathering requirements logic
-        print(f"Gathering requirements for {self.name} in {self.environment} environment.")
+        Perform a specified task if it is within the agent's capabilities.
 
-    def define_use_cases(self) -> None:
+        :param task: The task to be performed.
+        :return: A message indicating the result of the task execution.
         """
-        Define and prioritize use cases for the agent.
-        """
-        # Placeholder for defining use cases logic
-        print(f"Defining use cases for {self.name}.")
+        if task in self.tasks:
+            return f"Agent {self.name} is performing task: {task}"
+        else:
+            return f"Task '{task}' is not within the capabilities of agent {self.name}."
 
-    def document_requirements(self) -> None:
+    def add_task(self, task: str) -> None:
         """
-        Document functional and non-functional requirements.
-        """
-        # Placeholder for documenting requirements logic
-        print(f"Documenting requirements for {self.name}.")
+        Add a new task to the agent's list of capabilities.
 
-    def design_architecture(self) -> None:
+        :param task: The task to be added.
         """
-        Design the high-level architecture of the system.
-        """
-        # Placeholder for architecture design logic
-        print(f"Designing architecture for {self.name}.")
+        if task not in self.tasks:
+            self.tasks.append(task)
+            print(f"Task '{task}' added to agent {self.name}.")
+        else:
+            print(f"Task '{task}' is already in the list of tasks for agent {self.name}.")
 
-    def select_technology_stack(self) -> None:
+    def remove_task(self, task: str) -> None:
         """
-        Select the appropriate technology stack for development.
-        """
-        # Placeholder for technology stack selection logic
-        print(f"Selecting technology stack for {self.name}.")
+        Remove a task from the agent's list of capabilities.
 
-    def develop_components(self) -> None:
+        :param task: The task to be removed.
         """
-        Develop the components of the system.
-        """
-        # Placeholder for component development logic
-        print(f"Developing components for {self.name}.")
+        if task in self.tasks:
+            self.tasks.remove(task)
+            print(f"Task '{task}' removed from agent {self.name}.")
+        else:
+            print(f"Task '{task}' is not in the list of tasks for agent {self.name}.")
 
-    def integrate_and_test(self) -> None:
+    def list_tasks(self) -> list[str]:
         """
-        Integrate components and conduct integration testing.
-        """
-        # Placeholder for integration and testing logic
-        print(f"Integrating and testing components for {self.name}.")
+        List all tasks the agent is capable of performing.
 
-    def deploy_system(self) -> None:
+        :return: A list of tasks.
         """
-        Deploy the system to the production environment.
-        """
-        # Placeholder for deployment logic
-        print(f"Deploying {self.name} to production.")
+        return self.tasks
 
-    def provide_support(self) -> None:
-        """
-        Provide post-deployment support and maintenance.
-        """
-        # Placeholder for support and maintenance logic
-        print(f"Providing support for {self.name}.")
 
-    def create_documentation(self) -> None:
-        """
-        Create comprehensive documentation for the system.
-        """
-        # Placeholder for documentation creation logic
-        print(f"Creating documentation for {self.name}.")
+def main() -> None:
+    """
+    Main function to demonstrate the functionality of the AutonomousAgent class.
+    """
+    agent = AutonomousAgent(name="Agent001", tasks=["task1", "task2", "task3"])
+    print(agent.perform_task("task1"))
+    print(agent.perform_task("task4"))
+    agent.add_task("task4")
+    print(agent.perform_task("task4"))
+    agent.remove_task("task2")
+    print(agent.list_tasks())
 
-    def deliver_training(self) -> None:
-        """
-        Develop and deliver training sessions for end-users and technical staff.
-        """
-        # Placeholder for training delivery logic
-        print(f"Delivering training for {self.name}.")
+
+if __name__ == "__main__":
+    main()
