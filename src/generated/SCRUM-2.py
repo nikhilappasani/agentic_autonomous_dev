@@ -1,68 +1,146 @@
 class AutonomousAgent:
     """
-    A class to represent an autonomous agent capable of performing specific tasks with minimal human intervention.
+    A class representing an autonomous agent capable of performing specific tasks
+    with minimal human intervention.
     """
 
-    def __init__(self, name: str, tasks: list[str]):
+    def __init__(self, name: str, capabilities: list[str]):
         """
-        Initialize the autonomous agent with a name and a list of tasks.
+        Initialize the autonomous agent with a name and a list of capabilities.
 
         :param name: The name of the agent.
-        :param tasks: A list of tasks the agent is capable of performing.
+        :param capabilities: A list of capabilities the agent possesses.
         """
         self.name = name
-        self.tasks = tasks
+        self.capabilities = capabilities
 
     def perform_task(self, task: str) -> str:
         """
-        Perform a specified task if it is within the agent's capabilities.
+        Perform a task if it is within the agent's capabilities.
 
         :param task: The task to be performed.
         :return: A message indicating the result of the task attempt.
         """
-        if task in self.tasks:
-            return f"Agent {self.name} is performing task: {task}"
+        if task in self.capabilities:
+            return f"{self.name} successfully performed the task: {task}."
         else:
-            return f"Task '{task}' is not within the capabilities of agent {self.name}."
+            return f"{self.name} cannot perform the task: {task}."
 
-    def add_task(self, task: str) -> None:
+    def add_capability(self, capability: str) -> None:
         """
-        Add a new task to the agent's list of capabilities.
+        Add a new capability to the agent.
 
-        :param task: The task to be added.
+        :param capability: The capability to be added.
         """
-        if task not in self.tasks:
-            self.tasks.append(task)
-            print(f"Task '{task}' added to agent {self.name}.")
-        else:
-            print(f"Task '{task}' is already in the list of tasks for agent {self.name}.")
+        if capability not in self.capabilities:
+            self.capabilities.append(capability)
 
-    def remove_task(self, task: str) -> None:
+    def remove_capability(self, capability: str) -> None:
         """
-        Remove a task from the agent's list of capabilities.
+        Remove a capability from the agent.
 
-        :param task: The task to be removed.
+        :param capability: The capability to be removed.
         """
-        if task in self.tasks:
-            self.tasks.remove(task)
-            print(f"Task '{task}' removed from agent {self.name}.")
-        else:
-            print(f"Task '{task}' is not in the list of tasks for agent {self.name}.")
+        if capability in self.capabilities:
+            self.capabilities.remove(capability)
 
-    def list_tasks(self) -> list[str]:
+    def list_capabilities(self) -> list[str]:
         """
-        List all tasks the agent is capable of performing.
+        List all capabilities of the agent.
 
-        :return: A list of tasks.
+        :return: A list of the agent's capabilities.
         """
-        return self.tasks
+        return self.capabilities
 
 
-# Example usage:
-if __name__ == "__main__":
-    agent = AutonomousAgent(name="Agent001", tasks=["task1", "task2"])
-    print(agent.perform_task("task1"))
-    agent.add_task("task3")
-    print(agent.list_tasks())
-    agent.remove_task("task2")
-    print(agent.list_tasks())
+class SystemMonitor:
+    """
+    A class to monitor the performance and health of the autonomous agent system.
+    """
+
+    def __init__(self):
+        """
+        Initialize the system monitor with default metrics.
+        """
+        self.performance_metrics = {
+            "response_time": [],
+            "throughput": []
+        }
+
+    def log_performance(self, response_time: float, throughput: int) -> None:
+        """
+        Log performance metrics for the system.
+
+        :param response_time: The response time of the system.
+        :param throughput: The throughput of the system.
+        """
+        self.performance_metrics["response_time"].append(response_time)
+        self.performance_metrics["throughput"].append(throughput)
+
+    def get_average_response_time(self) -> float:
+        """
+        Calculate the average response time from logged data.
+
+        :return: The average response time.
+        """
+        return sum(self.performance_metrics["response_time"]) / len(self.performance_metrics["response_time"])
+
+    def get_average_throughput(self) -> float:
+        """
+        Calculate the average throughput from logged data.
+
+        :return: The average throughput.
+        """
+        return sum(self.performance_metrics["throughput"]) / len(self.performance_metrics["throughput"])
+
+
+class SecurityManager:
+    """
+    A class to manage security aspects of the autonomous agent system.
+    """
+
+    def __init__(self):
+        """
+        Initialize the security manager with default settings.
+        """
+        self.encryption_enabled = False
+        self.access_control_list = []
+
+    def enable_encryption(self) -> None:
+        """
+        Enable data encryption for the system.
+        """
+        self.encryption_enabled = True
+
+    def disable_encryption(self) -> None:
+        """
+        Disable data encryption for the system.
+        """
+        self.encryption_enabled = False
+
+    def add_user_to_acl(self, user: str) -> None:
+        """
+        Add a user to the access control list.
+
+        :param user: The user to be added.
+        """
+        if user not in self.access_control_list:
+            self.access_control_list.append(user)
+
+    def remove_user_from_acl(self, user: str) -> None:
+        """
+        Remove a user from the access control list.
+
+        :param user: The user to be removed.
+        """
+        if user in self.access_control_list:
+            self.access_control_list.remove(user)
+
+    def is_user_authorized(self, user: str) -> bool:
+        """
+        Check if a user is authorized based on the access control list.
+
+        :param user: The user to be checked.
+        :return: True if the user is authorized, False otherwise.
+        """
+        return user in self.access_control_list
