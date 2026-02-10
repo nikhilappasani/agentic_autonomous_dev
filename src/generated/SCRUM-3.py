@@ -2,10 +2,10 @@ from datetime import date
 
 def get_greeting_message() -> str:
     """
-    Constructs a greeting message that includes today's date.
+    Retrieves today's date and constructs a greeting message.
 
     Returns:
-        str: A greeting message with today's date.
+        str: A greeting message including today's date.
     """
     today = date.today()
     greeting_message = f"Hello, how are you today? Today's date is {today}."
@@ -13,14 +13,10 @@ def get_greeting_message() -> str:
 
 def main() -> None:
     """
-    Main function to execute the script.
-    Prints the greeting message with today's date.
+    Main function to execute the script and print the greeting message.
     """
-    try:
-        message = get_greeting_message()
-        print(message)
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    message = get_greeting_message()
+    print(message)
 
 if __name__ == "__main__":
     main()
