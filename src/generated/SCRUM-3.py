@@ -13,7 +13,8 @@ def get_greeting_message() -> str:
 
 def main() -> None:
     """
-    Main function to execute the script and print the greeting message.
+    Main function to execute the script.
+    Prints the greeting message with today's date.
     """
     try:
         message = get_greeting_message()
