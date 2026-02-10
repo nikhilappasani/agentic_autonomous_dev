@@ -1,23 +1,23 @@
-import datetime
+from datetime import date
 
-def get_today_date() -> str:
+def get_todays_date() -> str:
     """
-    Retrieves today's date in a formatted string.
+    Retrieves today's date and returns it as a formatted string.
 
     Returns:
-        str: Today's date formatted as 'Month Day, Year'.
+        str: Today's date formatted as "Month Day, Year".
     """
-    today_date = datetime.date.today()
-    return today_date.strftime('%B %d, %Y')
+    today = date.today()
+    formatted_date = today.strftime("%B %d, %Y")
+    return formatted_date
 
-def print_greeting() -> None:
+def print_greeting_with_date() -> None:
     """
-    Prints a greeting message along with today's date.
+    Prints a greeting message that includes today's date.
     """
-    greeting_message = "Hello, How are you today?"
-    today_date = get_today_date()
-    print(greeting_message)
-    print(f"Today's date is: {today_date}")
+    formatted_date = get_todays_date()
+    message = f"Hello, how are you today? Today's date is {formatted_date}."
+    print(message)
 
 if __name__ == "__main__":
-    print_greeting()
+    print_greeting_with_date()
